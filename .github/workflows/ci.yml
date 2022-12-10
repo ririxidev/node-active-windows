@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - uses: actions/setup-node@master
+        with:
+          node-version: 18
+          cache: "pnpm"
+      - name: Install packages
+        run: |
+          pnpm install --ignore-scripts
+        shell: bash
+      - name: Build addon
+        run: |
+          pnpm run rebuild
+        shell: bash
+      - name: Build module
+        run: |
+          pnpm run build
+        shell: bash

@@ -1,0 +1,9 @@
+# Node
+node_modules
+
+# Output(s)
+build
+dist
+
+# macOS
+.DS_Store
