@@ -5,13 +5,9 @@ export class Window {
 	pid: number;
 	bundlePath: string;
 
-	constructor(windowID: number, init = false) {
+	constructor(windowID: number) {
 		this.windowID = windowID;
 
-		if (init) this.init();
-	}
-
-	init(): void {
 		const { pid, bundlePath } = addon.getWindowInfo(this.windowID);
 
 		this.pid = pid;
